@@ -28,11 +28,6 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
-
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
@@ -48,4 +43,7 @@ export class AuthService {
       return null;
     }
   }
+
 }
+
+

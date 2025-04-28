@@ -13,7 +13,7 @@ import { AuthService } from '../auth.service';
 
 export class UserListComponent implements OnInit {
   users: User[] = [];
-  newUser: User = { name: '', email: '' };
+  newUser: User = { name: '', email: '', role: ''};
   editUser: User | null = null;
   role: string | null = null;
 
@@ -34,7 +34,7 @@ export class UserListComponent implements OnInit {
     if (this.newUser.name && this.newUser.email) {
       this.userService.addUser(this.newUser).subscribe((addedUser) => {
         this.users.push(addedUser);
-        this.newUser = { name: '', email: '' };
+        this.newUser = { name: '', email: '', role: ''};
       });
     }
   }

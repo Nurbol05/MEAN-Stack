@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { OperatorSubscriber } from 'rxjs/internal/operators/OperatorSubscriber';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
 })
+
 export class LoginComponent {
   email: string = '';
   password: string = '';
@@ -17,18 +19,14 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
+  onLogin(){
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        if (res && res.token) {
-          this.authService.saveToken(res.token);
-          this.router.navigate(['/users']);
-        }
-      },
-      error: (err) => {
-        console.error(err);
-        this.error = err.error?.error || 'Кіру қатесі';
+        if(res && res.token)
+        this.authService.saveToken(res.token)
+        this.router.navigate(['/users'])
       }
-    });
+    })
   }
+
 }
